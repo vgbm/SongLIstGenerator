@@ -11,7 +11,7 @@ def getFileList(path):
 	return list
 
 def makeOutput(songList):
-	sl = ['\n'.join(s) for s in songList]
+	sl = ['\n'.join(sorted(s)) for s in songList]
 	sl = '\n\n'.join(sl)
 	return sl
 
@@ -23,7 +23,10 @@ def writeOut(path,list):
 readPath = "/path/to/dir"
 writePath = readPath+"/songList.txt"
 
-os.remove(writePath)
+try:
+	os.remove(writePath)
+except:
+	pass
 
 output = makeOutput(getFileList(readPath))
 writeOut(writePath, output)
